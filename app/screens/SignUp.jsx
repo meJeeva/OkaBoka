@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ScrollView } from 'react-native'
 import { Button, Image, Input, Separator, TamaguiProvider, Text, View, XStack, YStack } from 'tamagui'
-import tamaguiConfig from '../../tamagui.config'
+import config from '../../tamagui.config'
 
 export default function SignUp({
     navigation
@@ -9,17 +9,17 @@ export default function SignUp({
     const [phoneNumber, setPhoneNumber] = useState('')
 
     return (
-        <TamaguiProvider config={tamaguiConfig}>
+        <TamaguiProvider config={config}>
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
                 <YStack f={1} ai="center" jc="center" bg="#3DC4A3" p="$4" space="$3">
 
                     {/* Title */}
-                    <Text fontSize={26} fontWeight="800" color="#000" textAlign="center" mt="$5">
+                    <Text fontFamily="PoppinsSemiBold" fontWeight="700" fontSize={26} color="#000" textAlign="center" mt="$5">
                         Welcome to okaBoka
                     </Text>
 
                     {/* Subtitle */}
-                    <Text color="#000" textAlign="center" mt="$1" mb="$3">
+                    <Text fontFamily="PoppinsMedium" fontSize={14} color="#000" textAlign="center" mt="$1" mb="$3">
                         Connect with emotionally similar people
                     </Text>
 
@@ -28,28 +28,29 @@ export default function SignUp({
                         <View
                             backgroundColor="white"
                             borderRadius={99}
-                            paddingHorizontal={10}
                             alignItems="center"
                             justifyContent="center"
                             alignSelf="center"
+                            padding={12}
                         >
                             <Image
                                 source={require('../../assets/images/icon.png')}
-                                width={150}
-                                height={150}
-                                resizeMode="contain"
-                                mb="$4"
+                                style={{
+                                    width: 120,
+                                    height: 120,
+                                    resizeMode: 'contain',
+                                }}
                             />
                         </View>
                     </YStack>
 
                     {/* Secondary Text */}
-                    <Text fontSize={16} color="#000" textAlign="center" mb="$4">
+                    <Text fontSize={16} fontFamily="PoppinsMedium" marginHorizontal={10} color="#000" textAlign="center" mb="$4">
                         Let’s start with your number your world begins here.
                     </Text>
 
                     {/* Phone Number Label */}
-                    <Text alignSelf="flex-start" ml="$2" fontWeight="700" mb="$1">
+                    <Text alignSelf="flex-start" fontFamily="PoppinsSemiBold" ml="$2" fontWeight="700" mb="$1">
                         Phone Number
                     </Text>
 
@@ -70,7 +71,7 @@ export default function SignUp({
                     {/* Separator with OR */}
                     <XStack ai="center" jc="center" w="90%" my="$3">
                         <Separator flex={1} bg="#ccc" />
-                        <Text mx="$2">or</Text>
+                        <Text mx="$2" fontFamily="PoppinsRegular">or</Text>
                         <Separator flex={1} bg="#ccc" />
                     </XStack>
 
@@ -83,17 +84,17 @@ export default function SignUp({
                         color="#000"
                         borderRadius={8}
                         mb="$2"
+                        fontFamily="PoppinsMedium"
                     >
                         Continue With Whatsapp
                     </Button>
 
                     {/* Send Code Button */}
                     <Button
-                        w="90%"
+                        w="50%"
                         bg="#1E1E1E"
                         color="#fff"
                         borderRadius={8}
-                        fontWeight="700"
                         mb="$3"
                         onPress={() => {
                             navigation.navigate('Verification')
@@ -103,7 +104,9 @@ export default function SignUp({
                     </Button>
 
                     {/* Footer Text */}
-                    <Text fontSize={12} color="#000" textAlign="center">
+                    <Text fontSize={12} color="#000" textAlign="center"
+                        fontFamily="PoppinsMedium"
+                    >
                         We'll never share your number
                     </Text>
 

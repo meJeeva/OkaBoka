@@ -1,11 +1,10 @@
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { useState } from 'react'
 import { StyleSheet, TextInput, View } from 'react-native'
 import { Button, Image, TamaguiProvider, Text, YStack } from 'tamagui'
 import tamaguiConfig from '../../tamagui.config'
 
-export default function Profile({
-    navigation
-}) {
+export default function Profile({ navigation }: { navigation: NativeStackNavigationProp<any> }) {
   const [name, setName] = useState('')
 
   return (
@@ -14,12 +13,7 @@ export default function Profile({
 
         {/* Profile Image */}
         <View
-          backgroundColor="white"
-          borderRadius={99}
-          p="$2"
-          alignItems="center"
-          justifyContent="center"
-          mb="$4"
+        
         >
           <Image
             source={require('../../assets/images/Profile.png')}
@@ -31,12 +25,16 @@ export default function Profile({
         </View>
 
         {/* Title */}
-        <Text fontSize={22} fontWeight="800" color="#000" textAlign="center" mb="$3">
+        <Text fontSize={20}  color="#000" textAlign="center" mb="$3"
+        fontFamily="PoppinsBold"
+        >
           What should we call you?
         </Text>
 
         {/* Input Label */}
-        <Text fontSize={16} fontWeight="700" color="#000" alignSelf="flex-start">
+        <Text fontSize={15} 
+        fontFamily="PoppinsSemiBold"
+        color="#000" alignSelf="flex-start">
           Full Name
         </Text>
 
@@ -59,7 +57,7 @@ export default function Profile({
 
         {/* Button */}
         <Button
-          w="90%"
+          w="50%"
           bg="#1E1E1E"
           color="#fff"
           borderRadius={8}
@@ -71,7 +69,9 @@ export default function Profile({
         </Button>
 
         {/* Footer Text */}
-        <Text fontSize={12} color="#000">
+        <Text fontSize={12} color="#000"
+        fontFamily="PoppinsSemiBold"
+        >
           Your safety is our priority
         </Text>
 

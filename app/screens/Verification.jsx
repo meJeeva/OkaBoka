@@ -20,33 +20,33 @@ export default function Verification({
                 <YStack f={1} ai="center" jc="center" bg="#3DC4A3" p="$4" space="$3">
 
 
-                    <YStack ai="center" jc="center" my="$4">
-                        <View
-                            backgroundColor="white"
-                            borderRadius={99}
-                            paddingHorizontal={10}
-                            alignItems="center"
-                            justifyContent="center"
-                            alignSelf="center"
-                        >
-                            <Image
-                                source={require('../../assets/images/icon.png')}
-                                width={150}
-                                height={150}
-                                resizeMode="contain"
-                                mb="$4"
-                            />
-                        </View>
-                    </YStack>
-
+                <YStack ai="center" jc="center" my="$4">
+  <View
+    backgroundColor="white"
+    borderRadius={99}
+    alignItems="center"
+    justifyContent="center"
+    alignSelf="center"
+    padding={12}
+  >
+    <Image
+      source={require('../../assets/images/icon.png')}
+      style={{
+        width: 120,
+        height: 120,
+        resizeMode: 'contain',
+      }}
+    />
+  </View>
+</YStack>
 
                     {/* Title */}
-                    <Text fontSize={24} fontWeight="800" color="#000" textAlign="center" mb="$1">
+                    <Text fontSize={24} fontFamily={'PoppinsSemiBold'} color="#000" textAlign="center" >
                         Verify your number
                     </Text>
 
                     {/* Subtitle */}
-                    <Text color="#000" textAlign="center" mb="$4">
+                    <Text color="#000" textAlign="center" mb="$4" fontFamily={'PoppinsRegular'} fontSize={12}>
                         We've sent a code to your phone
                     </Text>
 
@@ -73,7 +73,7 @@ export default function Verification({
 
                     {/* Verify Button */}
                     <Button
-                        w="90%"
+                        w="50%"
                         bg="#1E1E1E"
                         color="#fff"
                         borderRadius={8}
@@ -84,30 +84,21 @@ export default function Verification({
                         Verify
                     </Button>
 
-                     <Button
-                        w="90%"
-                        bg="#1E1E1E"
-                        color="#fff"
-                        borderRadius={8}
-                        fontWeight="700"
-                        mb="$3"
-                        onPress={() => {
-                            navigation.navigate('Verification')
-                        }}
-                    >
-                        Send Me The Code
-                    </Button>
 
                     {/* Resend Link */}
                     <Text fontSize={14} color="#000" textAlign="center">
                         Didn't receive code?{' '}
-                        <Text fontWeight="700" color="#000">
+                        <Text fontWeight="700" color="#000" 
+                        fontFamily={'PoppinsSemiBold'}
+                        >
                             Resend
                         </Text>
                     </Text>
 
                     {/* Timer Text */}
-                    <Text fontSize={12} color="#000" textAlign="center" mt="$1">
+                    <Text fontSize={12} color="#000" textAlign="center" mt="$1"
+                        fontFamily={'PoppinsRegular'}
+                    >
                         You can request a new code in 4 seconds
                     </Text>
 

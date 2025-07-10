@@ -4,11 +4,12 @@ import {
   ArrowRight,
   Bell,
   ChevronDown,
-  Plus
+  Plus,
+  X
 } from '@tamagui/lucide-icons'
 import * as ImagePicker from 'expo-image-picker'
 import React, { useState } from 'react'
-import { Alert, FlatList, StyleSheet, TouchableOpacity } from 'react-native'
+import { Alert, FlatList, Modal, StyleSheet, TouchableOpacity } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {
   Button,
@@ -18,6 +19,7 @@ import {
   TamaguiProvider,
   Text,
   Theme,
+  View,
   XStack,
   YStack
 } from 'tamagui'
@@ -26,10 +28,10 @@ import config from '../../tamagui.config'
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 28,
-    fontWeight: 'bold',
+    fontSize: 20,
     color: '#000',
     marginLeft: 8,
+    fontFamily:'PoppinsBold'
   },
   content: {
     fontSize: 16,
@@ -41,6 +43,7 @@ const styles = StyleSheet.create({
 export default function Home() {
   const [expandedIds, setExpandedIds] = useState<string[]>([])
   const [moodIndex, setMoodIndex] = useState(0)
+  const [showOptionModal, setShowOptionModal] = useState(false);
 
   const navigation  = useNavigation();
 
@@ -96,13 +99,7 @@ export default function Home() {
     }
   }
 
-  const showOptions = () => {
-    Alert.alert('Select Option', 'How do you want to add a moment?', [
-      { text: 'Take Photo', onPress: openCamera },
-      { text: 'Pick from Gallery', onPress: openGallery },
-      { text: 'Cancel', style: 'cancel' },
-    ])
-  }
+  const showOptions = () => setShowOptionModal(true);
 
 
   return (
@@ -113,14 +110,27 @@ export default function Home() {
             {/* Top Section */}
             <YStack bg="#3AC6A5">
               {/* Top Bar */}
-              <XStack jc="space-between" ai="center" px="$3" py="$5">
+              <XStack jc="space-between" ai="center" px="$3">
                 <XStack ai="center">
-                  <Image
-                    source={{ uri: 'https://i.imgur.com/Hh3y8z8.png' }}
-                    w={30}
-                    h={30}
-                    br={15}
-                  />
+                <YStack ai="center" jc="center" my="$4">
+  <View
+    backgroundColor="white"
+    borderRadius={99}
+    alignItems="center"
+    justifyContent="center"
+    alignSelf="center"
+    padding={5}
+  >
+    <Image
+      source={require('../../assets/images/icon.png')}
+      style={{
+        width: 30,
+        height: 30,
+        resizeMode: 'contain',
+      }}
+    />
+  </View>
+</YStack>
                   <Text style={styles.title} ml="$2">
                     OkaBoka
                   </Text>
@@ -128,9 +138,9 @@ export default function Home() {
                 <XStack ai="center" space="$3">
                   <Bell size={22} color="#000" />
                   <Image
-                    source={{ uri: 'https://i.imgur.com/BqHjLdR.png' }}
-                    w={30}
-                    h={30}
+                    source={require('../../assets/images/Profile.png')}
+                    w={35}
+                    h={35}
                     br={15}
                   />
                 </XStack>
@@ -138,11 +148,10 @@ export default function Home() {
 
               {/* Mood Section */}
               <Text
-                fontSize={18}
-                fontWeight="700"
+                fontSize={20}
                 color="#000"
                 ta="center"
-                mt="$2"
+                fontFamily={'PoppinsBold'}
               >
                 How I'm Feeling Right Now
               </Text>
@@ -156,11 +165,14 @@ export default function Home() {
                   bg="transparent"
                 />
                 <YStack ai="center">
-                  <Text fontSize={40}>{moods[moodIndex].emoji}</Text>
+                  <Text fontSize={40} 
+                  >{moods[moodIndex].emoji}</Text>
                   <Text fontSize={14} fontWeight="600" color="#000">
                     {moods[moodIndex].label}
                   </Text>
-                  <Text fontSize={12} color="#555">
+                  <Text fontSize={12} color="#555" 
+                fontFamily={'PoppinsRegular'}
+                  >
                     {moods[moodIndex].count}
                   </Text>
                 </YStack>
@@ -194,7 +206,9 @@ export default function Home() {
                         opacity={moodIndex === index ? 1 : 0.5}
                       >
                         <Text fontSize={30}>{mood.emoji}</Text>
-                        <Text fontSize={12}>{mood.label}</Text>
+                        <Text fontSize={12} 
+                                        fontFamily={'PoppinsRegular'}
+                        >{mood.label}</Text>
                       </YStack>
                     </TouchableOpacity>
                   ))}
@@ -224,17 +238,23 @@ export default function Home() {
                       shadowColor="#00000022"
                     >
                       <XStack jc="space-between" ai="center">
-                        <Text fontSize={13} fontWeight="700">
+                        <Text fontSize={12}
+                                        fontFamily={'PoppinsSemiBold'}
+                        >
                           {item.date}
                         </Text>
                         <Text fontSize={18}>{item.emoji}</Text>
                       </XStack>
                       <XStack ai="center" mt="$1">
-                        <Text fontSize={12} color="#555">
+                        <Text fontSize={10} color="#555" 
+                                                                fontFamily={'PoppinsRegular'}
+                        >
                           📍 {item.location}
                         </Text>
                       </XStack>
-                      <Text fontSize={12} color="#444" mt="$2">
+                      <Text fontSize={10} color="#444" mt="$2" ta={'center'} 
+                      fontFamily={'PoppinsRegular'}
+                      >
                         {item.description}
                       </Text>
 
@@ -287,7 +307,9 @@ export default function Home() {
             bottom={0}
             width="100%"
           >
-            <Text fontWeight="700" color="#000">
+            <Text fs={16} color="#000" 
+              fontFamily={'PoppinsBold'}
+            >
               Oka (You)
             </Text>
             {/* Plus Button in Center */}
@@ -309,15 +331,97 @@ export default function Home() {
     <Plus color="#fff" />
   </Button>
 
-            <Text fontWeight="700" color="#000">
+  <Text fs={20} color="#000" 
+              fontFamily={'PoppinsMedium'}
+            >
               Bond
             </Text>
-            <Text fontWeight="700" color="#000">
+            <Text fs={16} color="#000" 
+              fontFamily={'PoppinsMedium'}
+            >
               Oka's
             </Text>
           </XStack>
         </SafeAreaView>
       </Theme>
+      <Modal
+        visible={showOptionModal}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setShowOptionModal(false)}
+      >
+        <XStack
+          f={1}
+          ai="center"
+          jc="center"
+          bg="rgba(0,0,0,0.4)"
+          position="absolute"
+          top={0}
+          left={0}
+          right={0}
+          bottom={0}
+        >
+          <YStack
+            bg="#fff"
+            p="$5"
+            br={20}
+            w={280}
+            ai="center"
+            space="$3"
+            shadowColor="#000"
+            shadowOpacity={0.15}
+            shadowRadius={10}
+            position="relative"
+          >
+            {/* Back/Close Option */}
+            <Button
+              position="absolute"
+              top={10}
+              right={10}
+              bg="transparent"
+              onPress={() => setShowOptionModal(false)}
+              p={0}
+              minWidth={32}
+              minHeight={32}
+            >
+              <X size={22} color="#333" />
+            </Button>
+            <Text fontFamily="PoppinsBold" fontSize={18} mb="$2">
+              Select Option
+            </Text>
+            <Button
+              w="100%"
+              bg="#3AC6A5"
+              color="#fff"
+              onPress={() => {
+                setShowOptionModal(false);
+                openCamera();
+              }}
+            >
+              Take Photo
+            </Button>
+            <Button
+              w="100%"
+              bg="#3AC6A5"
+              color="#fff"
+              onPress={() => {
+                setShowOptionModal(false);
+                openGallery();
+              }}
+            >
+              Pick from Gallery
+            </Button>
+            <Button
+              w="100%"
+              bg="#eee"
+              color="#333"
+              onPress={() => setShowOptionModal(false)}
+            >
+              Cancel
+            </Button>
+          </YStack>
+        </XStack>
+      </Modal>
     </TamaguiProvider>
   )
 }

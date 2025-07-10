@@ -1,9 +1,9 @@
 import { useNavigation } from '@react-navigation/native'
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { ArrowLeft } from '@tamagui/lucide-icons'
+import { ArrowLeft, LocationEdit } from '@tamagui/lucide-icons'
 import React, { useState } from 'react'
 import { Dimensions, StyleSheet, TextInput } from 'react-native'
-import { Button, Text, View, XStack, YStack } from 'tamagui'
+import { Button, Text, XStack, YStack } from 'tamagui'
 
 // Define the navigation prop type
 // Replace 'RootStackParamList' with your actual stack param list if available
@@ -29,15 +29,19 @@ export default function AboutYou({ navigation }: AboutYouProps) {
     <YStack f={1} bg="#3DC4A3" p="$4" space="$3">
       
       {/* Back Icon */}
-      <ArrowLeft color="#000" size={24} marginTop={50}/>
+      <ArrowLeft color="#757575" size={24} marginTop={50}/>
 
       {/* Title */}
-      <Text fontSize={20} fontWeight="800" color="#000" mt="$3">
-        About You Screen
+      <Text fontSize={20} fontWeight="800" color="#000" mt="$3"
+      fontFamily={'PoppinsBold'}
+      >
+      A little about you so we match better
       </Text>
 
       {/* Date of Birth */}
-      <Text fontSize={14} fontWeight="700" color="#000" mt="$4">
+      <Text fontSize={14} color="#000" mt="$4"
+            fontFamily={'PoppinsBold'}
+      >
         Date of Birth
       </Text>
 
@@ -69,7 +73,9 @@ export default function AboutYou({ navigation }: AboutYouProps) {
       </XStack>
 
       {/* Gender */}
-      <Text fontSize={14} fontWeight="700" color="#000" mt="$4">
+      <Text fontSize={14} 
+            fontFamily={'PoppinsBold'}
+      color="#000" mt="$4">
         Gender
       </Text>
 
@@ -88,17 +94,23 @@ export default function AboutYou({ navigation }: AboutYouProps) {
         ))}
       </XStack>
 
-      {/* About TextInput */}
-      <TextInput
-        style={styles.input}
-        placeholder="Write Here"
-        value={about}
-        onChangeText={setAbout}
-      />
+      {/* About TextInput - show only if gender is 'Other' */}
+      {gender === 'Other' && (
+        <TextInput
+          style={styles.input}
+          placeholder="Write Here"
+          value={about}
+          onChangeText={setAbout}
+        />
+      )}
 
       {/* Location */}
-      <Text fontSize={14} fontWeight="700" color="#000" mt="$3">
-        Location <Text color="gray">(City,Country)</Text>
+      <Text fontSize={14} color="#000" mt="$3" 
+            fontFamily={'PoppinsBold'}
+      >
+        Location <Text color="gray" 
+            fontFamily={'PoppinsRegular'}
+        >(City,Country)</Text>
       </Text>
 
       <TextInput
@@ -110,16 +122,12 @@ export default function AboutYou({ navigation }: AboutYouProps) {
 
       {/* Use current location */}
       <XStack ai="center" space="$2" mt="$3">
-        <View
-          width={12}
-          height={12}
-          borderRadius={6}
-          bg={useCurrentLocation ? 'green' : 'white'}
-          borderWidth={1}
-          borderColor="#000"
-          onTouchEnd={() => setUseCurrentLocation(!useCurrentLocation)}
+        <LocationEdit 
+        color="#000" size={20} 
         />
-        <Text fontSize={14} color="#000">
+        <Text fontSize={14} color="#000" 
+        fontFamily={'PoppinsRegular'}
+        >
           Use current location
         </Text>
       </XStack>
@@ -138,7 +146,9 @@ export default function AboutYou({ navigation }: AboutYouProps) {
       </Button>
 
       {/* Footer Text */}
-      <Text fontSize={12} color="#000" textAlign="center" mt="$2">
+      <Text fontSize={12} color="#000"
+        fontFamily={'PoppinsRegular'}
+      textAlign="center" mt="$2">
         Who are you open to connecting with?
       </Text>
     </YStack>
@@ -155,14 +165,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 28,
-    fontWeight: 'bold',
     marginBottom: 12,
-  },
-  content: {
-    fontSize: 16,
-    fontWeight: '400',
-    color: '#333',
-    textAlign: 'center',
   },
   inputSmall: {
     flex: 1,
@@ -170,7 +173,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 8,
     paddingHorizontal: 16,
-    fontSize: 16
+    fontSize: 16,
+    fontFamily: 'PoppinsRegular'
   },
   input: {
     width: Dimensions.get('window').width - 32, // 16px padding on each side
@@ -179,6 +183,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 16,
     fontSize: 16,
-    marginTop: 10
+    marginTop: 10,
+    fontFamily: 'PoppinsRegular'
   }
 })
