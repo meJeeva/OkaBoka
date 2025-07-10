@@ -57,7 +57,7 @@ export default function Profile({ navigation }: { navigation: NativeStackNavigat
 
         {/* Button */}
         <Button
-          w="50%"
+          w="70%"
           bg="#1E1E1E"
           color="#fff"
           borderRadius={8}

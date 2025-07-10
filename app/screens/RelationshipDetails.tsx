@@ -18,6 +18,8 @@ const RelationshipDetails = ({ navigation }: RelationshipDetailsProps) => {
   const [company, setCompany] = useState('')
   const [role, setRole] = useState('')
   const [workType, setWorkType] = useState('')
+  const [relationshipStatus, setRelationshipStatus] = useState('')
+  const [interestedIn, setInterestedIn] = useState('')
 
   return (
     <TamaguiProvider config={config}>
@@ -47,22 +49,19 @@ const RelationshipDetails = ({ navigation }: RelationshipDetailsProps) => {
               </XStack>
 
               <XStack space="$3" jc="space-between">
-                <Button f={1} h={50} bg="#fff" borderRadius={12}>
-                  <Text color="#000" 
+                <Button f={1} h={50} bg={interestedIn === 'Male' ? '#1E1E1E' : '#fff'} borderRadius={12} onPress={() => setInterestedIn('Male')}>
+                  <Text color={interestedIn === 'Male' ? '#fff' : '#000'} 
                 fontFamily={'PoppinsRegular'}
-                  
                   >Male</Text>
                 </Button>
-                <Button f={1} h={50} bg="#fff" borderRadius={12}>
-                  <Text color="#000" 
+                <Button f={1} h={50} bg={interestedIn === 'Female' ? '#1E1E1E' : '#fff'} borderRadius={12} onPress={() => setInterestedIn('Female')}>
+                  <Text color={interestedIn === 'Female' ? '#fff' : '#000'} 
                 fontFamily={'PoppinsRegular'}
-                  
                   >Female</Text>
                 </Button>
-                <Button f={1} h={50} bg="#fff" borderRadius={12}>
-                  <Text color="#000"
+                <Button f={1} h={50} bg={interestedIn === 'Other' ? '#1E1E1E' : '#fff'} borderRadius={12} onPress={() => setInterestedIn('Other')}>
+                  <Text color={interestedIn === 'Other' ? '#fff' : '#000'}
                 fontFamily={'PoppinsRegular'}
-                  
                   >Other</Text>
                 </Button>
               </XStack>
@@ -74,19 +73,19 @@ const RelationshipDetails = ({ navigation }: RelationshipDetailsProps) => {
                 fontFamily={'PoppinsBold'}
                 >Relationship Status</Text>
               <XStack space="$3">
-                <Button f={1} h={50} bg="#fff" borderRadius={12}>
-                  <Text color="#000" 
+                <Button f={1} h={50} bg={relationshipStatus === 'Single' ? '#1E1E1E' : '#fff'} borderRadius={12} onPress={() => setRelationshipStatus('Single')}>
+                  <Text color={relationshipStatus === 'Single' ? '#fff' : '#000'} 
                 fontFamily={'PoppinsRegular'}
                   >Single</Text>
                 </Button>
-                <Button f={1} h={50} bg="#fff" borderRadius={12}>
-                  <Text color="#000" 
+                <Button f={1} h={50} bg={relationshipStatus === 'In A Relationship' ? '#1E1E1E' : '#fff'} borderRadius={12} onPress={() => setRelationshipStatus('In A Relationship')}>
+                  <Text color={relationshipStatus === 'In A Relationship' ? '#fff' : '#000'} 
                 fontFamily={'PoppinsRegular'}
                   >In A Relationship</Text>
                 </Button>
               </XStack>
-              <Button h={50} bg="#fff" borderRadius={12}>
-                <Text color="#000" 
+              <Button h={50} bg={relationshipStatus === 'Prefer Not To Say' ? '#1E1E1E' : '#fff'} borderRadius={12} onPress={() => setRelationshipStatus('Prefer Not To Say')}>
+                <Text color={relationshipStatus === 'Prefer Not To Say' ? '#fff' : '#000'} 
                 fontFamily={'PoppinsRegular'}
                 >Prefer Not To Say</Text>
               </Button>
